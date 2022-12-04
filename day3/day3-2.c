@@ -7,7 +7,7 @@ unsigned int get_priority(char item);
 void get_common_chars(char * target, char * str1, char * str2, char * str3);
 
 int main(void) {
-    FILE * data = fopen("day3.txt", "r");
+    FILE * data = fopen("input.txt", "r");
 
     char buf1[BUF_LEN] = {'\0'};
     char buf2[BUF_LEN] = {'\0'};
