@@ -8,7 +8,7 @@
 unsigned int popHighestInt(unsigned int * arr, unsigned int len);
 
 int main(void) {
-    FILE * data = fopen("day1.txt", "r");
+    FILE * data = fopen("input.txt", "r");
 
     char buf[BUF_LEN] = {'\0'};
     unsigned int total = 0;
