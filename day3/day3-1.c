@@ -8,7 +8,7 @@ void copy_str_span(char * target, char * source, unsigned int start, unsigned in
 void get_common_chars(char * target, char * source1, char * source2);
 
 int main(void) {
-    FILE * data = fopen("day3.txt", "r");
+    FILE * data = fopen("input.txt", "r");
 
     char buf[BUF_LEN] = {'\0'};
     unsigned int priority_sum = 0;
@@ -57,8 +57,8 @@ void get_common_chars(char * target, char * source1, char * source2) {
     unsigned int freq1[128] = {0};
     unsigned int freq2[128] = {0};
 
-    for (int i = 0; i < strlen(source1); i++) freq1[(unsigned int)source1[i]]++;
-    for (int i = 0; i < strlen(source2); i++) freq2[(unsigned int)source2[i]]++;
+    for (int i = 0; i < strlen(source1); i++) freq1[source1[i]]++;
+    for (int i = 0; i < strlen(source2); i++) freq2[source2[i]]++;
 
     unsigned int target_index = 0;
 

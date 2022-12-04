@@ -1,14 +1,14 @@
 #include <stdio.h>
 
-const unsigned int BUF_LEN = 8;
+#define BUF_LEN 8
 
 unsigned int eval_rochambeau(char xyz, char abc);
 
 int main(void) {
-    FILE * data = fopen("day2.txt", "r");
+    FILE * data = fopen("input.txt", "r");
 
     unsigned int score = 0;
-    char buf[BUF_LEN];
+    char buf[BUF_LEN] = {'\0'};
 
     while (fgets(buf, BUF_LEN, data) != NULL) {
         score += eval_rochambeau(buf[2], buf[0]);
@@ -22,31 +22,19 @@ int main(void) {
 }
 
 unsigned int eval_rochambeau(char xyz, char abc) {
-    unsigned int score = 0;
+    unsigned int score = xyz - 'X' + 1;
     
-    if (xyz == 'X') {
-        score = 1;
-        
-        if (abc == 'C') { score += 6; } // Win
-        if (abc == 'A') { score += 3; } // Draw
-        if (abc == 'B') { score += 0; } // Loss
-    }
+    if (xyz == 'X' && abc == 'C') score += 6; // Win
+    if (xyz == 'X' && abc == 'A') score += 3; // Draw
+    if (xyz == 'X' && abc == 'B') score += 0; // Loss
 
-    if (xyz == 'Y') {
-        score = 2;
-        
-        if (abc == 'A') { score += 6; }
-        if (abc == 'B') { score += 3; }
-        if (abc == 'C') { score += 0; }
-    }
+    if (xyz == 'Y' && abc == 'A') score += 6;
+    if (xyz == 'Y' && abc == 'B') score += 3;
+    if (xyz == 'Y' && abc == 'C') score += 0;
 
-    if (xyz == 'Z') {
-        score = 3;
-        
-        if (abc == 'B') { score += 6; }
-        if (abc == 'C') { score += 3; }
-        if (abc == 'A') { score += 0; }
-    }
+    if (xyz == 'Z' && abc == 'B') score += 6;
+    if (xyz == 'Z' && abc == 'C') score += 3;
+    if (xyz == 'Z' && abc == 'A') score += 0;
 
     return score;
 }

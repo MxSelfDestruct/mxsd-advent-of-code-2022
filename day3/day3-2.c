@@ -4,7 +4,7 @@
 #define BUF_LEN 64
 
 unsigned int get_priority(char item);
-void get_common_chars(char * target, char * source1, char * source2, char * source3);
+void get_common_chars(char * target, char * str1, char * str2, char * str3);
 
 int main(void) {
     FILE * data = fopen("day3.txt", "r");
@@ -41,14 +41,14 @@ unsigned int get_priority(char item) {
     return 0;
 }
 
-void get_common_chars(char * target, char * source1, char * source2, char * source3) {
+void get_common_chars(char * target, char * str1, char * str2, char * str3) {
     unsigned int freq1[128] = {0};
     unsigned int freq2[128] = {0};
     unsigned int freq3[128] = {0};
 
-    for (int i = 0; i < strlen(source1); i++) freq1[(unsigned int)source1[i]]++;
-    for (int i = 0; i < strlen(source2); i++) freq2[(unsigned int)source2[i]]++;
-    for (int i = 0; i < strlen(source3); i++) freq3[(unsigned int)source3[i]]++;
+    for (int i = 0; i < strlen(str1); i++) freq1[str1[i]]++;
+    for (int i = 0; i < strlen(str2); i++) freq2[str2[i]]++;
+    for (int i = 0; i < strlen(str3); i++) freq3[str3[i]]++;
 
     unsigned int target_index = 0;
 
