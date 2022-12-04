@@ -25,6 +25,7 @@ int main(void) {
 
         str_split(s1, s2, buf, ",");
 
+        // Then, split at dash
         char s1_low[BUF_LEN / 4] = {'\0'};
         char s1_high[BUF_LEN / 4] = {'\0'};
         char s2_low[BUF_LEN / 4] = {'\0'};
