@@ -15,9 +15,6 @@ int main(void) {
     unsigned int totals[MAX_TOTALS] = {0};
     unsigned int totals_arr_index = 0;
 
-    // Initialise totals[]
-    for (unsigned int i = 0; i < MAX_TOTALS; i++) totals[i] = 0;
-
     while (fgets(buf, BUF_LEN, data) != NULL) {
         if (strcmp("\n", buf) == 0) {
             totals[totals_arr_index] = total;
