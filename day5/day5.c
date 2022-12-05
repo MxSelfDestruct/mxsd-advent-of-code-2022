@@ -15,7 +15,7 @@ int main(void) {
 
     char stacks [9][BUF_LEN];
 
-    while(fgets(buf, BUF_LEN, data) != NULL) {
+    while(fgets(buf, BUF_LEN, data) != NULL && buf[0] == ' ' || buf[0] == '[') {
         buf[strcspn(buf, "\n")] = '\0'; // Send trailing newline to hell
 
         char crates[BUF_LEN] = {'\0'};
