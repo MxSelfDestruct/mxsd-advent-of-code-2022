@@ -6,8 +6,8 @@
 #define BUF_LEN 32
 
 void str_split(char * target1, char * target2, char * source, char * split);
-bool is_range_subset(int a_low, int a_high, int b_low, int b_high);
-bool do_ranges_overlap(int a_low, int a_high, int b_low, int b_high);
+bool is_subset(int a_low, int a_high, int b_low, int b_high);
+bool is_overlap(int a_low, int a_high, int b_low, int b_high);
 
 int main(void) {
     FILE * data = fopen("input.txt", "r");
@@ -25,7 +25,6 @@ int main(void) {
 
         str_split(s1, s2, buf, ",");
 
-        // Then, split at dash
         char s1_low[BUF_LEN / 4] = {'\0'};
         char s1_high[BUF_LEN / 4] = {'\0'};
         char s2_low[BUF_LEN / 4] = {'\0'};
@@ -34,14 +33,14 @@ int main(void) {
         str_split(s1_low, s1_high, s1, "-");
         str_split(s2_low, s2_high, s2, "-");
 
-        if (is_range_subset(atoi(s1_low), atoi(s1_high), atoi(s2_low), atoi(s2_high)) == true ||
-            is_range_subset(atoi(s2_low), atoi(s2_high), atoi(s1_low), atoi(s1_high)) == true) {
-                subset_ranges++;
-        }
+        if (is_overlap(atoi(s1_low), atoi(s1_high), atoi(s2_low), atoi(s2_high)) == true ||
+            is_overlap(atoi(s2_low), atoi(s2_high), atoi(s1_low), atoi(s1_high))== true ) {
+            overlapping_ranges++;
 
-        if (do_ranges_overlap(atoi(s1_low), atoi(s1_high), atoi(s2_low), atoi(s2_high)) == true ||
-            do_ranges_overlap(atoi(s2_low), atoi(s2_high), atoi(s1_low), atoi(s1_high)) == true) {
-                overlapping_ranges++;
+            if (is_subset(atoi(s1_low), atoi(s1_high), atoi(s2_low), atoi(s2_high)) == true ||
+                is_subset(atoi(s2_low), atoi(s2_high), atoi(s1_low), atoi(s1_high)) == true ) {
+                subset_ranges++;
+            }
         }
     }
 
@@ -67,10 +66,10 @@ void str_split(char * target1, char * target2, char * source, char * split) {
     }
 }
 
-bool is_range_subset(int a_low, int a_high, int b_low, int b_high) {
+bool is_subset(int a_low, int a_high, int b_low, int b_high) {
     return (b_low <= a_low && b_high >= a_high);
 }
 
-bool do_ranges_overlap(int a_low, int a_high, int b_low, int b_high) {
+bool is_overlap(int a_low, int a_high, int b_low, int b_high) {
     return (b_low <= a_low && b_high >= a_high || b_low <= a_high && b_high >= a_low);
 }
