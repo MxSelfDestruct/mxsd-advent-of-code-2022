@@ -4,6 +4,8 @@
 
 #define BUF_LEN 8192
 #define SLICE_LEN 16
+#define PACKET_MARKER_LEN 4
+#define MESSAGE_MARKER_LEN 14
 
 void get_substring(char * target, const char * source, unsigned int start, unsigned int end);
 bool letters_unique(char * str);
@@ -17,23 +19,23 @@ int main(void) {
     char slice[SLICE_LEN] = {'\0'};
 
     // Get start-of-packet marker
-    for (int i = 0; i < strlen(buf) - 3; i++) {
-        get_substring(slice, buf, i, i + 3);
+    for (int i = 0; i < strlen(buf) - PACKET_MARKER_LEN; i++) {
+        get_substring(slice, buf, i, i + PACKET_MARKER_LEN - 1);
 
         if (letters_unique(slice) == true) {
             printf("Start-of-packet marker: %c", slice[strlen(slice) - 1]);
-            printf(", after %u characters.\n", i + 4);
+            printf(", after %u characters.\n", i + PACKET_MARKER_LEN);
             break;
         }
     }
 
     // Get start-of-message marker
-    for (int i = 0; i < strlen(buf) - 13; i++) {
-        get_substring(slice, buf, i, i + 13);
+    for (int i = 0; i < strlen(buf) - MESSAGE_MARKER_LEN; i++) {
+        get_substring(slice, buf, i, i + MESSAGE_MARKER_LEN - 1);
 
         if (letters_unique(slice) == true) {
             printf("Start-of-message marker: %c", slice[strlen(slice) - 1]);
-            printf(", after %u characters.\n", i + 14);
+            printf(", after %u characters.\n", i + MESSAGE_MARKER_LEN);
             break;
         }
     }
