@@ -48,10 +48,7 @@ void get_substring(char * target, const char * source, unsigned int start, unsig
 bool letters_unique(char * str) {
     unsigned int freq[128] = {0};
     for (unsigned int i = 0; i < strlen(str); i++) freq[str[i]]++;
-    
-    for (unsigned int i = 0; i < 128; i++) {
-        if (freq[i] > 1) return false;
-    }
+    for (unsigned int i = 0; i < 128; i++) if (freq[i] > 1) return false;
 
     return true;
 }
