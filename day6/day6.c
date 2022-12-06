@@ -36,9 +36,7 @@ unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed
 
     for (int i = 0; i < strlen(str) - unique_chars_needed; i++) {
         get_substring(slice, str, i, i + unique_chars_needed - 1);
-
-        if (letters_unique(slice) == true) {
-            return i + unique_chars_needed;
-        }
+        
+        if (letters_unique(slice) == true) return i + unique_chars_needed;
     }
 }
