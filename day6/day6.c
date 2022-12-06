@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUF_LEN 8192
-#define SLICE_LEN 16
-
 void get_substring(char * target, const char * source, unsigned int start, unsigned int end);
 bool letters_unique(const char * str);
 unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed);
@@ -12,8 +9,8 @@ unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed
 int main(void) {
     FILE * data = fopen("input.txt", "r");
 
-    char buf[BUF_LEN] = {'\0'};
-    fgets(buf, BUF_LEN, data);
+    char buf[8192] = {'\0'};
+    fgets(buf, 8192, data);
 
     printf("Start-of-packet marker detected after %u characters.\n", get_start_marker(buf, 4));
     printf("Start-of-message marker detected after %u characters.\n", get_start_marker(buf, 14));
@@ -34,7 +31,8 @@ bool letters_unique(const char * str) {
 }
 
 unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed) {
-    char slice[SLICE_LEN] = {'\0'};
+    char slice[unique_chars_needed + 1];
+    for (unsigned int i = 0; i <= unique_chars_needed; i++) slice[i] = '\0';
 
     for (int i = 0; i < strlen(str) - unique_chars_needed; i++) {
         get_substring(slice, str, i, i + unique_chars_needed - 1);
