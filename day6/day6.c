@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void strslice(char * target, const char * source, unsigned int start, unsigned int end);
+void str_slice(char * target, const char * source, unsigned int start, unsigned int end);
 bool letters_unique(const char * str);
 unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed);
 
@@ -18,7 +18,7 @@ int main(void) {
     return 0;
 }
 
-void strslice(char * target, const char * source, unsigned int start, unsigned int end) {
+void str_slice(char * target, const char * source, unsigned int start, unsigned int end) {
     for (unsigned int i = start; i <= end + 1; i++) {
         if (i <= end) target[i - start] = source[i];
         else target[i - start] = '\0';
@@ -39,7 +39,7 @@ unsigned int get_start_marker(const char * str, unsigned int unique_chars_needed
     char slice[unique_chars_needed + 1];
 
     for (int i = 0; i < strlen(str) - unique_chars_needed; i++) {
-        strslice(slice, str, i, i + unique_chars_needed - 1);
+        str_slice(slice, str, i, i + unique_chars_needed - 1);
         if (letters_unique(slice) == true) return i + unique_chars_needed;
     }
 }

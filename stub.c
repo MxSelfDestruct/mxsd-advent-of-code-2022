@@ -7,14 +7,31 @@
 
 int main(void) {
     FILE * data = fopen("input.txt", "r");
-
     char buf[BUF_LEN] = {'\0'};
 
-    while(fgets(buf, BUF_LEN, data) != NULL) {
-        buf[strcspn(buf, "\n")] = '\0'; // Send trailing newline to hell
+    // Get number of lines in file and max line length
+    int lines = 1;
+    int length = 1;
 
-        // Do whatever
+    for (int i = 0; fgets(buf, BUF_LEN, data) != NULL; i++) {
+        buf[strcspn(buf, "\n")] = '\0'; // Send trailing newline to hell
+        int l = strlen(buf) + 1;
+        if (l > length) length = l;
+        lines++;
     }
+
+    rewind(data);
+
+    // Allocate a 2D array to store the file in
+    char * instructions[lines];
+    for (int i = 0; i < lines; i++) instructions[i] = malloc(length * sizeof(char));
+
+    for (int i = 0; fgets(buf, BUF_LEN, data) != NULL; i++) {
+        buf[strcspn(buf, "\n")] = '\0'; // Send trailing newline to hell
+        strcpy(instructions[i], buf);
+    }
+
+    fclose(data);
 
     return 0;
 }
